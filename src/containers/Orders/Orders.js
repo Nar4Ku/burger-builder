@@ -8,7 +8,6 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
 
 class Orders extends React.Component {
-
     componentDidMount() {
         this.props.onFetchOrders();
     }
@@ -17,10 +16,12 @@ class Orders extends React.Component {
         let orders = <Spinner />;
         if (!this.props.loading) {
             orders = this.props.orders.map(order => (
-                <Order key={order.id} ingredients={order.ingredients} price={+order.price} />
+                <Order
+                    key={order.id}
+                    ingredients={order.ingredients}
+                    price={order.price} />
             ))
         }
-
         return (
             <div>
                 {orders}

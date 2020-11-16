@@ -1,7 +1,7 @@
 import * as actionsType from './actionsTypes';
 import axios from '../../axios-orders';
 
-export const purchaseBugerSucess = (id, orderData) => {
+export const purchaseBurgerSuccess = (id, orderData) => {
     return {
         type: actionsType.PURCHASE_BURGER_SUCCESS,
         orderId: id,
@@ -14,23 +14,23 @@ export const purchaseBurgerFail = (error) => {
         type: actionsType.PURCHASE_BURGER_FAIL,
         error: error
     };
-};
-
-export const purchaseBugerStart = () => {
-    return {
-        type: actionsType.PURCHASE_BURGER_START
-    }
 }
 
-export const purchaseBuger = (orderData) => {
+export const purchaseBurgerStart = () => {
+    return {
+        type: actionsType.PURCHASE_BURGER_START
+    };
+};
+
+export const purchaseBurger = (orderData) => {
     return dispatch => {
-        dispatch(purchaseBugerStart());
+        dispatch(purchaseBurgerStart());
         axios.post('/orders.json', orderData)
-            .then(response => {
-                dispatch(purchaseBugerSucess(response.data.name, orderData));
+            .then(res => {
+                dispatch(purchaseBurgerSuccess(res.data.name, orderData));
             })
-            .catch(error => {
-                dispatch(purchaseBurgerFail(error));
+            .catch(err => {
+                dispatch(purchaseBurgerFail(err));
             });
     };
 };
@@ -38,7 +38,7 @@ export const purchaseBuger = (orderData) => {
 export const purchaseInit = () => {
     return {
         type: actionsType.PURCHASE_INIT
-    }
+    };
 };
 
 export const fetchOrdersSuccess = (orders) => {
